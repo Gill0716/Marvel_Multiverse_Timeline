@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Multiverse Timeline</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="font-roboto">
+
+    <div id="background-pattern"></div>
+
+    <header class="sticky top-0 z-20">
+        <div class="header-content container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="font-orbitron text-2xl md:text-3xl font-bold header-title tracking-wider">MARVEL MULTIVERSE TIMELINE</h1>
+                <p class="text-sm header-subtitle mt-1 uppercase tracking-widest">Chronological Tracking Interface</p>
+            </div>
+            <button id="dark-mode-toggle" class="theme-toggle">
+                <svg id="theme-toggle-dark-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
+                <svg id="theme-toggle-light-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <aside class="lg:col-span-1">
+                <div class="ui-panel sticky top-28">
+                    <h2 class="ui-panel-header">FILTER PROTOCOLS</h2>
+                    <div class="p-6 space-y-6">
+                        <div>
+                            <label for="search-input">Keyword Search</label>
+                            <input type="text" id="search-input" class="ui-input" placeholder="Search Title...">
+                        </div>
+                        <div>
+                            <label for="era-select">Filter by Saga</label>
+                            <select id="era-select" class="ui-input"><option value="all">All Sagas</option></select>
+                        </div>
+                        <div>
+                            <label for="universe-select">Filter by Universe</label>
+                            <select id="universe-select" class="ui-input"><option value="all">All Universes</option></select>
+                        </div>
+                        <div>
+                            <label>Filter by Media Type</label>
+                            <div id="type-buttons" class="flex flex-wrap gap-2 mt-2"></div>
+                        </div>
+                        <button id="reset-filters" class="ui-button w-full">RESET FILTERS</button>
+                        <div class="pt-4 border-t border-[var(--panel-border-light)] dark:border-[var(--panel-border-dark)] space-y-4">
+                            <button id="suggest-watch-btn" class="ui-button w-full">✨ Suggest My Next Watch</button>
+                            <button id="connections-btn" class="ui-button w-full">🔗 Find Connections</button>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="lg:col-span-3">
+                <section id="dashboard" class="ui-panel mb-8">
+                     <h2 class="ui-panel-header">MISSION OVERVIEW</h2>
+                     <div class="p-6">
+                        <div class="mb-6">
+                            <h3 class="font-orbitron text-lg font-semibold mb-3 text-center header-title tracking-wide">TIMELINE COMPLETION</h3>
+                            <div class="progress-container">
+                                <div id="progress-bar" class="progress-bar">0%</div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="text-center">
+                                <h3 class="font-orbitron text-lg font-semibold mb-2 header-title tracking-wide">RELEASES BY DECADE</h3>
+                                <div class="chart-container"><canvas id="releasesByDecadeChart"></canvas></div>
+                            </div>
+                            <div class="text-center">
+                                <h3 class="font-orbitron text-lg font-semibold mb-2 header-title tracking-wide">MEDIA TYPE ANALYSIS</h3>
+                                <div class="chart-container"><canvas id="mediaTypeChart"></canvas></div>
+                            </div>
+                        </div>
+                     </div>
+                </section>
+
+                <section id="timeline-section">
+                    <h2 class="font-orbitron text-2xl font-bold mb-4 header-title tracking-wide">CHRONOLOGICAL DATABASE</h2>
+                    <div id="timeline-container" class="relative border-l-2 border-cyan-500/30 ml-2">
+                        <p id="no-results" class="hidden text-center text-gray-500 p-8">NO MATCHING DATA FOUND</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <div id="gemini-modal" class="modal-backdrop">
+        <div class="ui-panel modal-content">
+            <div class="ui-panel-header modal-header">
+                <h2 id="modal-title" class="font-orbitron">SYNOPSIS</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="p-6 overflow-y-auto">
+                <div id="modal-loader" class="text-center hidden">
+                    <div class="spinner"></div>
+                    <p id="modal-loader-text" class="mt-4 text-cyan-400 tracking-widest uppercase">GENERATING INTEL...</p>
+                </div>
+                <p id="modal-content" class="text-gray-300 whitespace-pre-wrap"></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
