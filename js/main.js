@@ -270,19 +270,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     async function callGemini(prompt) {
-        if (!GEMINI_API_KEY || GEMINI_API_KEY === "PASTE_YOUR_API_KEY_HERE") {
-            return "API Key not configured. Please add your Gemini API key to js/main.js";
-        }
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${GEMINI_API_KEY}`;
+        // This URL points to your new proxy function.
+        // Netlify automatically makes it available at this path.
+        const proxyUrl = `/.netlify/functions/proxy-gemini`;
+        
         try {
-            const result = await fetchWithBackoff(apiUrl, {
+            const response = await fetch(proxyUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                body: JSON.stringify({ prompt: prompt }) // Send the prompt in the body
             });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Proxy error: ${errorText}`);
+            }
+            
+            const result = await response.json();
             return result.candidates[0].content.parts[0].text;
+
         } catch (error) {
-            console.error("Gemini API call failed:", error);
+            console.error("API call through proxy failed:", error);
             return "Intel could not be retrieved at this time. Please try again later.";
         }
     }
