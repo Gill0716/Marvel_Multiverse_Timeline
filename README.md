@@ -1,8 +1,6 @@
 # 🛰️ MARVEL MULTIVERSE HOLO-DATABASE
 
-<p align="center">
-  <img src="[Marvel Banner](images/my_banner.jpg)" alt="Marvel Multiverse Holo-Database Banner" width="100%">
-</p>
+![Marvel Multiverse Holo-Database Banner](images/my_banner.jpg)
 
 <p align="center">
   <a href="https://marvelmultiversetimeline.netlify.app/" target="_blank">
