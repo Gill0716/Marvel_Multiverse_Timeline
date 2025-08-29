@@ -1,4 +1,4 @@
-# 🛰️ MARVEL MULTIVERSE HOLO-DATABASE
+# 🛰️ MARVEL MULTIVERSE TIMELINE 
 
 ![Marvel Multiverse Holo-Database Banner](images/my_banner.jpg)
 
