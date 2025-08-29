@@ -1,7 +1,7 @@
 # 🛰️ MARVEL MULTIVERSE HOLO-DATABASE
 
 <p align="center">
-  <img src="[Marvel Banner](https://4kwallpapers.com/images/walls/thumbs_3t/1479.jpg)" alt="Marvel Multiverse Holo-Database Banner" width="100%">
+  <img src="[Marvel Banner](images/my_banner.jpg)" alt="Marvel Multiverse Holo-Database Banner" width="100%">
 </p>
 
 <p align="center">
