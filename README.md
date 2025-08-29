@@ -25,9 +25,7 @@ This isn’t your average wiki — it’s a **Stark-grade AI-powered interface**
 - Decode **variants** across different Earths (616, 838, 10005…)  
 - And, of course, guide you on **what to watch next** like an AI Jarvis ✨  
 
-<p align="center">
-  <img src="https://i.ibb.co/Z6t68kB/multiverse-portal.gif" alt="Marvel Multiverse Portal Animation" width="70%">
-</p>
+![Marvel Multiverse Portal](images/Temporal_Loom.webp)
 
 ---
 
@@ -57,9 +55,7 @@ Visualize your watch history with **Stark-tech dashboards**:
 - 💡 **Suggest Next** → personalized watchlist guidance  
 - 🔗 **Find Connections** → see how *Loki (TV)* ties into *Doctor Strange 2*  
 
-<p align="center">
-  <img src="https://i.ibb.co/5Ls1Jbb/stark-hud.gif" alt="Tony Stark HUD Animation" width="60%">
-</p>
+![iron man HUD](images/hud.avif)
 
 ---
 
@@ -81,9 +77,7 @@ This project was engineered with:
 - ⚡ **Netlify Serverless Functions** → Gemini AI proxy  
 - 💻 **Vanilla JavaScript** → Holo-logic  
 
-<p align="center">
-  <img src="https://i.ibb.co/FmHw6m2/ironman-coding.gif" alt="Iron Man Coding" width="70%">
-</p>
+![iron man coding](images/coding.jpg)
 
 ---
 
